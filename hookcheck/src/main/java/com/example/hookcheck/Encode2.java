@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import u.aly.cz;
+
 /**
  * Created by zk on 2017/12/21.
  */
@@ -230,7 +232,7 @@ public class Encode2 {
 
         private byte O = 4;
         public String a = "359125053640852";//imei
-        public String b = "6532a64c4da485c5194c6bdace787b13";
+        public String b = "6532a64c4da485c5194c6bdace787b13"; //idmd5  是imei的 MD5
         public String c = "f8:a9:d0:71:6d:07";//mac
         public String d;
         public String e = "AOSP on HammerHead";
@@ -851,7 +853,7 @@ public class Encode2 {
         private static final int s = 1;
         private static final int t = 2;
         public String a = "8FE97E45DD8506131893648188375098";
-        public long b = 1514048103621L;
+        public long b = /*1514048103621L;*/  System.currentTimeMillis();
         public long c = 0;
         public long d = 0;
         public List<bg> e;
@@ -898,6 +900,63 @@ public class Encode2 {
 
     }
 
+    /* compiled from: ImprintValue */
+    public enum e implements co {
+        VALUE((short) 1, "value"),
+        TS((short) 2, "ts"),
+        GUID((short) 3, "guid");
+
+        private static Map<String, e> d = null;
+        private final short e;
+        private final String f;
+
+        static {
+            d = new HashMap();
+            Iterator it = EnumSet.allOf(e.class).iterator();
+            while (it.hasNext()) {
+                e eVar = (e) it.next();
+                d.put(eVar.b(), eVar);
+            }
+        }
+
+        public static e a(int i) {
+            switch (i) {
+                case 1:
+                    return VALUE;
+                case 2:
+                    return TS;
+                case 3:
+                    return GUID;
+                default:
+                    return null;
+            }
+        }
+
+        public static e b(int i) {
+            e a = a(i);
+            if (a != null) {
+                return a;
+            }
+            throw new IllegalArgumentException("Field " + i + " doesn't exist!");
+        }
+
+        public static e a(String str) {
+            return (e) d.get(str);
+        }
+
+        private e(short s, String str) {
+            this.e = s;
+            this.f = str;
+        }
+
+        public short a() {
+            return this.e;
+        }
+
+        public String b() {
+            return this.f;
+        }
+    }
 
     /* compiled from: ImprintValue */
     public static class bb {
@@ -911,11 +970,18 @@ public class Encode2 {
         public long b;
         public String c;
         private byte k;
+        private e[] l;
 
         public bb(String a, long b, String c) {
             this.a = a;
             this.b = b;
             this.c = c;
+        }
+
+        public bb() {
+            this.k = (byte) 0;
+            this.l = new e[]{Encode2.e.VALUE};
+
         }
 
         public void b(bb bbVar) {
@@ -935,6 +1001,30 @@ public class Encode2 {
         }
 
 
+
+        public void a(cz dgVar, bb bbVar) {
+            while (true) {
+                Encode.db l = dgVar.l();
+                if (l.b == (byte) 0) {
+                        return;
+                }
+                switch (l.c) {
+                    case (short) 1:
+                        bbVar.a = dgVar.z();
+                        break;
+                    case (short) 2:
+                        bbVar.b = dgVar.x();
+                        break;
+                    case (short) 3:
+                        bbVar.c = dgVar.z();
+                        break;
+                }
+            }
+        }
+
+
+
+
     }
 
     public static class ba {//这个类现在没有用到不知道为什么
@@ -951,7 +1041,6 @@ public class Encode2 {
         private byte k;
 
         {
-            String z = z();
 
             a.put("pretime", new bb("1514050717724", 1514050717724L, "6cea18b4f31e8578d5565e222faa22fc2ba30059"));
             a.put("install_datetime", new bb("2017-12-19 10:56:13", 1514050717724L, "6cea18b4c115fe952a920e0394a0fe6fa5bdc8f4"));
@@ -967,62 +1056,38 @@ public class Encode2 {
         }
 
 
-        public String b(int i) {
-            try {
-                d(i);
-                byte[] bArr = new byte[i];
-                this.d(bArr, 0, i);
-                return new String(bArr, "UTF-8");
-            } catch (Exception e) {
+        public void a(cz dgVar, ba baVar) {
+            while (true) {
+                Encode.db l = dgVar.l();
+                if (l.b == (byte) 0) {
+                    return;
+                }
+                switch (l.c) {
+                    case (short) 1:
 
-            }
-            return null;
-        }
+                        Encode.dd n = dgVar.n();
+                        baVar.a = new HashMap(n.c * 2);
+                        for (int i = 0; i < n.c; i++) {
+                            String z = dgVar.z();
+                            bb bbVar = new bb();
+                            bbVar.a(dgVar);
+                            baVar.a.put(z, bbVar);
+                        }
+                        break;
+                    case (short) 2:
 
+                        baVar.b = dgVar.w();
+                        break;
+                    case (short) 3:
 
-        public String z() {
-            int w = w();
-            return b(w);
-        }
-
-        byte[] o = new byte[4];
-
-        public int w() {
-            int i = 0;
-            byte[] bArr = this.o;
-
-            a(this.o, 0, 4);
-
-            return (bArr[i + 3] & 255) | ((((bArr[i] & 255) << 24) | ((bArr[i + 1] & 255) << 16)) | ((bArr[i + 2] & 255) << 8));
-        }
-
-        private int a(byte[] bArr, int i, int i2) {
-            d(i2);
-            return this.d(bArr, i, i2);
-        }
-
-        protected void d(int i) {
-           /* if (i < 0) {
-
-            } else if (this.f) {
-                this.e -= i;
-                if (this.e < 0) {
+                        baVar.c = dgVar.z();
+                        break;
 
                 }
-            }*/
-        }
-
-        public int d(byte[] bArr, int i, int i2) {
-            int i3 = 0;
-            while (i3 < i2) {
-                int a = a(bArr, i + i3, i2 - i3);
-                if (a <= 0) {
-                }
-                i3 += a;
             }
-            return i3;
-        }
 
+
+        }
 
         public static void b(ba baVar) {
 
@@ -1149,6 +1214,7 @@ public class Encode2 {
             // a.put("utdid",new ay("WYIYStrgNn0DACENC11qDg5n",/*System.currentTimeMillis()*/1514172810708L,1));
             a.put("serial", new ay("06deab2c43a8b14e",/*System.currentTimeMillis()*/1514279863905L, 1));
 
+            //idmd5  是imei的 MD5
             a.put("idmd5", new ay("6532a64c4da485c5194c6bdace787b13",/*System.currentTimeMillis()*/1514279863905L, 1));
             a.put("imei", new ay("359125053640852",/*System.currentTimeMillis()*/1514279863890L, 1));
             a.put("mac", new ay("f8:a9:d0:71:6d:07",/*System.currentTimeMillis()*/1514279863903L, 1));

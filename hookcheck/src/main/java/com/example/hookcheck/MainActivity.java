@@ -7,6 +7,8 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 import java.util.Locale;
 
+import u.aly.cz;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -18,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-     Encode1.bp.b();;
+   // Encode1.bp.b();;
 
     }
 

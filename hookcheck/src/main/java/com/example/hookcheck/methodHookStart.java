@@ -56,12 +56,19 @@ public class methodHookStart implements IXposedHookLoadPackage {
                             final Class<?> bb = XposedHelpers.findClass("u.aly.bb", classLoader);
 
 
-                            XposedHelpers.findAndHookMethod("u.aly.t", classLoader, "a", byte[].class, new XC_MethodHook() {//hook http調用的地方（傳參）
+                            XposedHelpers.findAndHookMethod("u.aly.t", classLoader, "a", byte[].class,String.class, new XC_MethodHook() {//hook http調用的地方（傳參）
                                 @Override
-                                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                    super.beforeHookedMethod(param);
-                                    XposedBridge.log("加密后： " + parseByte2HexStr((byte[]) param.args[0]));
-                                    // new Throwable("wodelog").printStackTrace();
+                                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                    super.afterHookedMethod(param);
+                                    XposedBridge.log("请求链接： " + param.args[1]);
+                                    XposedBridge.log("请求参数： " + parseByte2HexStr((byte[]) param.args[0]));
+                                    XposedBridge.log("请求结果： " + parseByte2HexStr((byte[]) param.getResult()));
+
+
+                                  /* StackTraceElement[] wodelogs = new Throwable("wodelog").getStackTrace();
+                                    for (int i = 0; i <wodelogs.length ; i++) {
+                                        XposedBridge.log( wodelogs[i].toString());
+                                    }*/
                                 }
                             });
 
@@ -73,6 +80,32 @@ public class methodHookStart implements IXposedHookLoadPackage {
 
                                 }
                             });
+
+
+                        /*    XposedHelpers.findAndHookMethod("u.aly.dt", classLoader,"f", new XC_MethodHook() {//hook http調用的地方（傳參）
+                                @Override
+                                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                    super.beforeHookedMethod(param);
+                                    XposedBridge.log("监控请求返回值1-----------------------------------------start ");
+                                      StackTraceElement[] wodelogs = new Throwable("wodelog").getStackTrace();
+                                    for (int i = 0; i <wodelogs.length ; i++) {
+                                        XposedBridge.log( wodelogs[i].toString());
+                                    }
+                                     XposedBridge.log("监控请求返回值1-----------------------------------------end ");
+                                }
+                            });*/
+
+
+                          /*  XposedHelpers.findAndHookConstructor("u.aly.bb", classLoader, new XC_MethodHook() {//hook http調用的地方（傳參）
+                                @Override
+                                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                    super.beforeHookedMethod(param);
+                                     StackTraceElement[] wodelogs = new Throwable("wodelog").getStackTrace();
+                                    for (int i = 0; i <wodelogs.length ; i++) {
+                                        XposedBridge.log( wodelogs[i].toString());
+                                    }
+                                }
+                            });*/
 
 
 
@@ -91,7 +124,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                             });*/
 
 
-                            XposedHelpers.findAndHookMethod("u.aly.c", classLoader, "e", new XC_MethodHook() {//hook 參數生成的地方
+                        /*    XposedHelpers.findAndHookMethod("u.aly.c", classLoader, "e", new XC_MethodHook() {//hook 參數生成的地方
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     super.afterHookedMethod(param);
@@ -124,9 +157,9 @@ public class methodHookStart implements IXposedHookLoadPackage {
 
 
                                 }
-                            });
+                            });*/
 
-                            XposedHelpers.findAndHookMethod("u.aly.c", classLoader, "a", byte[].class, int.class, new XC_MethodHook() {//hook 參數生成的地方
+                          /*  XposedHelpers.findAndHookMethod("u.aly.c", classLoader, "a", byte[].class, int.class, new XC_MethodHook() {//hook 參數生成的地方
 
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -154,7 +187,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                     XposedBridge.log("c类里面 signature:" + parseByte2HexStr((byte[]) param.getResult()));
 
                                 }
-                            });
+                            });*/
 
                             //  final String class_name[]={"ap","ao","bi","ar","bf","am","at","cr","av","bc","bg","be","bm","bl","bb","ba","ax","ay","az","an","bd","aq","bn"};
                             final String class_name[] = {"at", "cr", "av", "bc", "bg", "be", "bm", "bl", "ba", "an", "bd", "aq", "bn"};
@@ -169,7 +202,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                 });
                             }
 
-                            XposedHelpers.findAndHookMethod("u.aly.bp$a", classLoader, "b", dg, bp, new XC_MethodHook() {//hook 參數生成的地方
+                           /* XposedHelpers.findAndHookMethod("u.aly.bp$a", classLoader, "b", dg, bp, new XC_MethodHook() {//hook 參數生成的地方
                                 @Override
                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                     super.beforeHookedMethod(param);
@@ -196,27 +229,63 @@ public class methodHookStart implements IXposedHookLoadPackage {
 
 
                                 }
-                            });
-
-                           /* XposedHelpers.findAndHookMethod("u.aly.cz", classLoader,"z", new XC_MethodHook() {
-                                @Override
-                                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    super.afterHookedMethod(param);
-
-                                    Field f_boolean = param.thisObject.getClass().getDeclaredField("f");
-                                    Field e_int = param.thisObject.getClass().getDeclaredField("e");
-                                    f_boolean.setAccessible(true);
-                                    e_int.setAccessible(true);
-                                    Object f =f_boolean.get( param.thisObject);
-                                    Object e =e_int.get( param.thisObject);
-
-
-                                    XposedBridge.log( "string："+param.getResult() +";f:"+f+";e:"+e);
-                                }
                             });*/
 
 
+                            final String fun_name[] = {"z", "x","w","u","v"};
+                            for (int i = 0; i < fun_name.length; i++) {
+                                XposedHelpers.findAndHookMethod("u.aly.cz", classLoader, fun_name[i], new XC_MethodHook() {
+                                    @Override
+                                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                        super.afterHookedMethod(param);
 
+                                      /*  Field f_boolean = param.thisObject.getClass().getDeclaredField("f");
+                                        Field e_int = param.thisObject.getClass().getDeclaredField("e");
+                                        f_boolean.setAccessible(true);
+                                        e_int.setAccessible(true);
+                                        Object f = f_boolean.get(param.thisObject);
+                                        Object e = e_int.get(param.thisObject);
+*/                                      String oo = param.getResult().toString();
+                                        String name = param.method.getName();
+
+
+
+                                        //   XposedBridge.log( "string："+param.getResult()/* +";f:"+f+";e:"+e*/);
+
+                                        StackTraceElement[] wodelogs = new Throwable("wodelog").getStackTrace();
+
+
+                                        String xx = "";
+                                        for (int j = 2; j <8; j++) {
+
+
+
+                                            for (int x =0; x < j; x++) {
+                                                xx += "-";
+                                            }
+
+                                            if (name.equals("u")){
+                                                XposedBridge.log(name+xx+wodelogs[j]+":"+"(读取一个byte)"+":"+oo );
+                                            }else  if (name.equals("v")){
+                                                XposedBridge.log(name+xx+wodelogs[j]+":"+"(读取一个short)"+":"+oo );
+                                            }else  if (name.equals("w")){
+                                                XposedBridge.log(name+xx+wodelogs[j]+":"+"(读取一个int)"+":"+oo );
+                                            }else  if (name.equals("x")){
+                                                XposedBridge.log(name+xx+wodelogs[j]+":"+"(读取一个long)"+":"+oo );
+                                            }else  if (name.equals("z")){
+                                                XposedBridge.log(name+xx+wodelogs[j]+":"+"(读取一个字符串)"+":"+oo );
+                                            }
+
+                                        }
+
+
+
+
+                                    }
+                                });
+
+
+                            }
 
 
 
