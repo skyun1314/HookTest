@@ -965,7 +965,7 @@ public class Encode2 {
         private static final Encode.db g = new Encode.db("ts", (byte) 10, (short) 2);
         private static final Encode.db h = new Encode.db("guid", (byte) 11, (short) 3);
 
-        private static final int j = 0;
+        private  final int j = 0;
         public String a;
         public long b;
         public String c;
@@ -1035,12 +1035,12 @@ public class Encode2 {
 
 
         private static final int j = 0;
-        public static Map<String, bb> a = new ArrayMap<>();
-        public int b = 1;
-        public String c = "619cc68684811dafbc454b2a789c9d0a";
+        public  Map<String, bb> a = new ArrayMap<>();
+        public int b ;
+        public String c ;
         private byte k;
 
-        {
+       /* {
 
             a.put("pretime", new bb("1514050717724", 1514050717724L, "6cea18b4f31e8578d5565e222faa22fc2ba30059"));
             a.put("install_datetime", new bb("2017-12-19 10:56:13", 1514050717724L, "6cea18b4c115fe952a920e0394a0fe6fa5bdc8f4"));
@@ -1053,7 +1053,7 @@ public class Encode2 {
             a.put("os_version", new bb("4.4.4", 1514050717724L, "6cea18b4a35f2afb1a40fd5055e28b8b872c942b"));
             a.put("channel", new bb("yuzhuangceshi2", 1514050717724L, "6cea18b40dae9556b1bbaf325798bac4b98311a7"));
 
-        }
+        }*/
 
 
         public void a(cz dgVar, ba baVar) {
@@ -1070,7 +1070,7 @@ public class Encode2 {
                         for (int i = 0; i < n.c; i++) {
                             String z = dgVar.z();
                             bb bbVar = new bb();
-                            bbVar.a(dgVar);
+                            bbVar.a(dgVar,bbVar);
                             baVar.a.put(z, bbVar);
                         }
                         break;

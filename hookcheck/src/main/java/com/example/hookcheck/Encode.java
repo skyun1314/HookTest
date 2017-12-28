@@ -239,7 +239,7 @@ public class Encode {
 
 
         buffer.append(s);
-        if(buffer.length()==1260){
+        if(buffer.length()==2012){
             Log.e("wodelog","");
         }
 
