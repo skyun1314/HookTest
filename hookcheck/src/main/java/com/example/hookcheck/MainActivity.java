@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-       /* Encode1.c c = new Encode1.c();
+        Encode1.c c = new Encode1.c();
         Encode1.bp.b(c);;
 
-        c.timestamp=1514452331;
-        c.serial1=2;*/
+        c.timestamp=1514532717;
+        c.serial1=2;
 
        cz.bj bj = new cz.bj();
         bj.a(new cz(), bj);
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         Encode1.c.entity_str=Encode.hexStringToBytes( Encode2.bn.b());
 
-   /*     c.length=Encode1.c.entity_str.length;
+      /*  c.length=Encode1.c.entity_str.length;
         c.entity= Encode1.c.a(Encode1.c.entity_str);;
 
         c.guid=Encode1.c. a(c.signature,c.timestamp);

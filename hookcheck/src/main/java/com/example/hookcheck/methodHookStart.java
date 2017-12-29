@@ -104,6 +104,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
 
 
 
+/*
 
                             XposedHelpers.findAndHookMethod("u.aly.bl", classLoader,"a",long.class, new XC_MethodHook() {//hook http調用的地方（傳參）
                                 @Override
@@ -133,6 +134,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                 }
 
                             });
+*/
 
 
 
@@ -213,21 +215,21 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                 }
                             });*/
 
-                          /*  XposedHelpers.findAndHookMethod("u.aly.c", classLoader, "a", byte[].class, int.class, new XC_MethodHook() {//hook 參數生成的地方
+                            XposedHelpers.findAndHookMethod("u.aly.c", classLoader, "a", byte[].class, int.class, new XC_MethodHook() {//hook 參數生成的地方
 
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     super.afterHookedMethod(param);
 
 
-                                    XposedBridge.log("c类里面 d函数  的时间戳:" + param.args[1]);
+                                   // XposedBridge.log("c类里面 d函数  的时间戳:" + param.args[1]);
 
                                     Field j_int = param.thisObject.getClass().getDeclaredField("j");
                                     j_int.setAccessible(true);
                                     Object j = j_int.get(param.thisObject);
                                     XposedBridge.log("c类里面 j变量  的时间戳:" + j);
-                                    XposedBridge.log("c类里面 guid:" + parseByte2HexStr((byte[]) param.getResult()));
-  *//*
+                                   /* XposedBridge.log("c类里面 guid:" + parseByte2HexStr((byte[]) param.getResult()));
+
                                     XposedBridge.log("c类里面 d函数  的第一个参数:" + parseByte2HexStr((byte[]) param.args[0]));
                                  Field m_int = param.thisObject.getClass().getDeclaredField("m");
                                     m_int.setAccessible(true);
@@ -240,7 +242,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                     XposedBridge.log("c类里面 l:" + parseByte2HexStr((byte[]) l));
 
 
-                                  *//* *//*
+
 
 
                                     Object bn_this = param.thisObject;
@@ -265,12 +267,11 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                         }
 
                                     }
-
+*/
 
 
                                 }
                             });
-*/
                             //  final String class_name[]={"ap","ao","bi","ar","bf","am","at","cr","av","bc","bg","be","bm","bl","bb","ba","ax","ay","az","an","bd","aq","bn"};
                             final String class_name[] = {"at", "cr", "av", "bc", "bg", "be", "bm", "bl", "ba", "an", "bd", "aq", "bn"};
                             for (int i = 0; i < class_name.length; i++) {

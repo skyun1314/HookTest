@@ -33,10 +33,10 @@ public class Encode2 {
         public byte m = 7;
 
 
-        public void a(){
+        public void a(int c){
             a=1;
             b=0;
-            c=125;
+            this.c=c;
         }
 
 
@@ -772,7 +772,7 @@ public class Encode2 {
     }
 
 
-    static class bg {
+    public static class bg {
         private static final Encode.dl d = new Encode.dl("Page");
         private static final Encode.db e = new Encode.db("page_name", (byte) 11, (short) 1);
         private static final Encode.db f = new Encode.db("duration", (byte) 10, (short) 2);
@@ -783,7 +783,7 @@ public class Encode2 {
         public long b;
         private byte i;
 
-        bg(String a,long b){
+        public bg(String a, long b){
             this.a=a;
             this.b=b;
         }
@@ -881,19 +881,15 @@ public class Encode2 {
 
 
 
-        public bl(long b, long c, int dur1, int dur2){
-            this.a= "0B5448BB5F167F9097FF8ED68C8F15A4";//  b();
+        public bl(long b, long c,String a){
+            this.a=a;//  b();
             this.b=b;
             this.c=c;
             this.d=c-b;
-            c(dur1,dur2);
+
         }
 
-        public void c(int dur1,int dur2){
-            //Page(page_name:com.szqd.dialer.ui.activity.DialerActivity, duration:4107)
-            e.add(new bg("com.szqd.dialer.ui.activity.DialerActivity",dur1));
-            e.add(new bg("com.szqd.dialer.ui.activity.DialerActivity",dur2));
-        }
+
 
 
         public String b() {
@@ -1274,13 +1270,13 @@ public class Encode2 {
 
         {//这下面的东西都是又顺序的
             // a.put("utdid",new ay("WYIYStrgNn0DACENC11qDg5n",/*System.currentTimeMillis()*/1514172810708L,1));
-            a.put("serial", new ay("06deab2c43a8b14e",/*System.currentTimeMillis()*/1514462178951L, 1));
+            a.put("serial", new ay("06deab2c43a8b14e",/*System.currentTimeMillis()*/1514532587473L, 1));
 
             //idmd5  是imei的 MD5
-            a.put("idmd5", new ay("6532a64c4da485c5194c6bdace787b13",/*System.currentTimeMillis()*/1514462178956L, 1));
-            a.put("imei", new ay("359125053640852",/*System.currentTimeMillis()*/1514462178957L, 1));
-            a.put("mac", new ay("f8:a9:d0:71:6d:07",/*System.currentTimeMillis()*/1514462178955L, 1));
-            a.put("android_id", new ay("e8aaef782ac9e225",/*System.currentTimeMillis()*/1514462178955L, 1));
+            a.put("idmd5", new ay("6532a64c4da485c5194c6bdace787b13",/*System.currentTimeMillis()*/1514532587484L, 1));
+            a.put("imei", new ay("359125053640852",/*System.currentTimeMillis()*/1514532587470L, 1));
+            a.put("mac", new ay("f8:a9:d0:71:6d:07",/*System.currentTimeMillis()*/1514532587483L, 1));
+            a.put("android_id", new ay("e8aaef782ac9e225",/*System.currentTimeMillis()*/1514532587473L, 1));
 
 
             b.add(new ax("idmd5", null, "6532a64c4da485c5194c6bdace787b13",/*System.currentTimeMillis()*/1514462178956L));
@@ -1497,7 +1493,7 @@ public class Encode2 {
             Encode.d();
             Encode.b();
 
-            Log.e("wodelog", "haha2:" + Encode.buffer.toString());
+            Log.e("wodelog", "链接 其中一个 参数:" + Encode.buffer.toString());
             String xx = Encode.buffer.toString();
             Encode.buffer.setLength(0);
             return xx;

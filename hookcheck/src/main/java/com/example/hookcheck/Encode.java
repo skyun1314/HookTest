@@ -244,7 +244,7 @@ public class Encode {
 
 
         buffer.append(s);
-        if(buffer.length()==2864){
+        if(buffer.length()==2604){
 
             Log.e("wodelog","");
         }
