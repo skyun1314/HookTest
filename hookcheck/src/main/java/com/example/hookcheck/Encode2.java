@@ -3,6 +3,8 @@ package com.example.hookcheck;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -19,7 +21,7 @@ import u.aly.cz;
 public class Encode2 {
 
 
-    static class ap {
+    public static class ap {
         private static final Encode.dl e = new Encode.dl("ClientStats");
         private static final Encode.db f = new Encode.db("successful_requests", (byte) 8, (short) 1);
         private static final Encode.db g = new Encode.db("failed_requests", (byte) 8, (short) 2);
@@ -29,6 +31,14 @@ public class Encode2 {
         public int b = 0;
         public int c = 0;
         public byte m = 7;
+
+
+        public void a(){
+            a=1;
+            b=0;
+            c=125;
+        }
+
 
 
         public boolean l() {
@@ -773,6 +783,13 @@ public class Encode2 {
         public long b;
         private byte i;
 
+        bg(String a,long b){
+            this.a=a;
+            this.b=b;
+        }
+
+
+
         public static void b(bg bgVar) {
             Encode.a();
             if (bgVar.a != null) {
@@ -840,7 +857,7 @@ public class Encode2 {
     }
 
 
-    static class bl {
+    public static class bl {
         private static final Encode.dl i = new Encode.dl("Session");
         private static final Encode.db j = new Encode.db("id", (byte) 11, (short) 1);
         private static final Encode.db k = new Encode.db("start_time", (byte) 10, (short) 2);
@@ -852,14 +869,59 @@ public class Encode2 {
         private static final int r = 0;
         private static final int s = 1;
         private static final int t = 2;
-        public String a = "8FE97E45DD8506131893648188375098";
-        public long b = /*1514048103621L;*/  System.currentTimeMillis();
+        public String a ;
+        public long b;  //开始时间和结束时间
         public long c = 0;
-        public long d = 0;
-        public List<bg> e;
+        public long d = 0;//他俩相减
+        public List<bg> e=new ArrayList<>();
         public List<be> f;
         public bm g;
         private byte u;
+
+
+
+
+        public bl(long b, long c, int dur1, int dur2){
+            this.a= "0B5448BB5F167F9097FF8ED68C8F15A4";//  b();
+            this.b=b;
+            this.c=c;
+            this.d=c-b;
+            c(dur1,dur2);
+        }
+
+        public void c(int dur1,int dur2){
+            //Page(page_name:com.szqd.dialer.ui.activity.DialerActivity, duration:4107)
+            e.add(new bg("com.szqd.dialer.ui.activity.DialerActivity",dur1));
+            e.add(new bg("com.szqd.dialer.ui.activity.DialerActivity",dur2));
+        }
+
+
+        public String b() {
+            String f = "359125053640852";//imei;
+            String appkey ="5836a0ab7f2c746c4b001800";//appkey;
+            long currentTimeMillis = System.currentTimeMillis();
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(currentTimeMillis).append(appkey).append(f);
+            return  a(stringBuilder.toString());
+        }
+
+        public  String a(String str) {
+            try {
+                byte[] bytes = str.getBytes();
+                MessageDigest instance = MessageDigest.getInstance("MD5");
+                instance.reset();
+                instance.update(bytes);
+                bytes = instance.digest();
+                StringBuffer stringBuffer = new StringBuffer();
+                for (int i = 0; i < bytes.length; i++) {
+                    stringBuffer.append(String.format("%02X", new Object[]{Byte.valueOf(bytes[i])}));
+                }
+                return stringBuffer.toString();
+            } catch (NoSuchAlgorithmException e1) {
+                e1.printStackTrace();
+            }
+            return null;
+        }
 
 
         public static void b(bl blVar) {
@@ -1212,22 +1274,22 @@ public class Encode2 {
 
         {//这下面的东西都是又顺序的
             // a.put("utdid",new ay("WYIYStrgNn0DACENC11qDg5n",/*System.currentTimeMillis()*/1514172810708L,1));
-            a.put("serial", new ay("06deab2c43a8b14e",/*System.currentTimeMillis()*/1514279863905L, 1));
+            a.put("serial", new ay("06deab2c43a8b14e",/*System.currentTimeMillis()*/1514462178951L, 1));
 
             //idmd5  是imei的 MD5
-            a.put("idmd5", new ay("6532a64c4da485c5194c6bdace787b13",/*System.currentTimeMillis()*/1514279863905L, 1));
-            a.put("imei", new ay("359125053640852",/*System.currentTimeMillis()*/1514279863890L, 1));
-            a.put("mac", new ay("f8:a9:d0:71:6d:07",/*System.currentTimeMillis()*/1514279863903L, 1));
-            a.put("android_id", new ay("e8aaef782ac9e225",/*System.currentTimeMillis()*/1514279863893L, 1));
+            a.put("idmd5", new ay("6532a64c4da485c5194c6bdace787b13",/*System.currentTimeMillis()*/1514462178956L, 1));
+            a.put("imei", new ay("359125053640852",/*System.currentTimeMillis()*/1514462178957L, 1));
+            a.put("mac", new ay("f8:a9:d0:71:6d:07",/*System.currentTimeMillis()*/1514462178955L, 1));
+            a.put("android_id", new ay("e8aaef782ac9e225",/*System.currentTimeMillis()*/1514462178955L, 1));
 
 
-            b.add(new ax("idmd5", null, "6532a64c4da485c5194c6bdace787b13",/*System.currentTimeMillis()*/1514279863905L));
+            b.add(new ax("idmd5", null, "6532a64c4da485c5194c6bdace787b13",/*System.currentTimeMillis()*/1514462178956L));
 
-            b.add(new ax("mac", null, "f8:a9:d0:71:6d:07", /*System.currentTimeMillis()*/1514279863903L));
-            b.add(new ax("serial", null, "06deab2c43a8b14e",/*System.currentTimeMillis()*/1514279863905L));
-            b.add(new ax("imei", null, "359125053640852", /*System.currentTimeMillis()*/1514279863890L));
+            b.add(new ax("mac", null, "f8:a9:d0:71:6d:07", /*System.currentTimeMillis()*/1514462178955L));
+            b.add(new ax("serial", null, "06deab2c43a8b14e",/*System.currentTimeMillis()*/1514462178951L));
+            b.add(new ax("imei", null, "359125053640852", /*System.currentTimeMillis()*/1514462178957L));
 
-            b.add(new ax("android_id", null, "e8aaef782ac9e225", /*System.currentTimeMillis()*/1514279863893L));
+            b.add(new ax("android_id", null, "e8aaef782ac9e225", /*System.currentTimeMillis()*/1514462178955L));
 
             //   b.add(new ax("utdid", "","WYIYStrgNn0DACENC11qDg5n", /*System.currentTimeMillis()*/1514172810708L));
 
@@ -1338,17 +1400,17 @@ public class Encode2 {
 
     }
 
-    static class bn {//这个已经new出来了
+    public static class bn {//这个已经new出来了
 
 
-        public static ap a = new ap();
+        public static ap a = new ap();//这个参数没有设置
         public static ao b = new ao();
         public static ar c = new ar();
         public static bf d = new bf();
         public static am e = new am();
         public static List<bc> f;
-        public static List<bl> g;
-        public static ba h;//=new ba();
+        public static List<bl> g=new ArrayList<>();//这个参数没有 找到
+        public static ba h;//这个参数没有设置
         public static az i = new az();
         public static an j;
         public static aq k;

@@ -3,6 +3,7 @@ package com.example.hookcheck;
 import android.util.Log;
 
 import java.nio.ByteBuffer;
+import java.security.MessageDigest;
 import java.util.Locale;
 
 /**
@@ -88,6 +89,10 @@ public class Encode {
     public static void a(ByteBuffer byteBuffer) {
         a(byteBuffer.array(), byteBuffer.position() + byteBuffer.arrayOffset(), byteBuffer.limit() - byteBuffer.position());
     }
+
+
+
+
 
 
     public static void a(String str) {
@@ -239,7 +244,8 @@ public class Encode {
 
 
         buffer.append(s);
-        if(buffer.length()==2012){
+        if(buffer.length()==2864){
+
             Log.e("wodelog","");
         }
 

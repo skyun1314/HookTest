@@ -54,6 +54,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                             final Class<?> az = XposedHelpers.findClass("u.aly.az", classLoader);
                             final Class<?> ax = XposedHelpers.findClass("u.aly.ax", classLoader);
                             final Class<?> bb = XposedHelpers.findClass("u.aly.bb", classLoader);
+                            final Class<?> bl = XposedHelpers.findClass("u.aly.bl", classLoader);
 
 
                             XposedHelpers.findAndHookMethod("u.aly.t", classLoader, "a", byte[].class,String.class, new XC_MethodHook() {//hook http調用的地方（傳參）
@@ -80,6 +81,59 @@ public class methodHookStart implements IXposedHookLoadPackage {
 
                                 }
                             });
+
+
+
+
+                           /* XposedHelpers.findAndHookMethod("u.aly.ap", classLoader,"d" ,int.class, new XC_MethodHook() {//hook 查看
+                                @Override
+                                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                    super.beforeHookedMethod(param);
+                                    XposedBridge.log("我被执行了2" );
+
+                                    XposedBridge.log("监控请求返回值1-----------------------------------------start "+param.args[0]);
+                                    StackTraceElement[] wodelogs = new Throwable("wodelog").getStackTrace();
+                                    for (int i = 0; i <wodelogs.length ; i++) {
+                                        XposedBridge.log( wodelogs[i].toString());
+                                    }
+                                    XposedBridge.log("监控请求返回值1-----------------------------------------end "+param.args[0]);
+
+                                }
+                            });*/
+
+
+
+
+
+                            XposedHelpers.findAndHookMethod("u.aly.bl", classLoader,"a",long.class, new XC_MethodHook() {//hook http調用的地方（傳參）
+                                @Override
+                                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                    super.afterHookedMethod(param);
+                                    XposedBridge.log("查看bl  第二个参数");
+                                    StackTraceElement[] wodelogs = new Throwable("wodelog").getStackTrace();
+                                    for (int i = 0; i <wodelogs.length ; i++) {
+                                        XposedBridge.log( wodelogs[i].toString());
+                                    }
+
+                                }
+
+                            });
+
+
+                            XposedHelpers.findAndHookMethod("u.aly.bl", classLoader,"a",List.class, new XC_MethodHook() {//hook http調用的地方（傳參）
+                                @Override
+                                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                    super.afterHookedMethod(param);
+                                    XposedBridge.log("查看bl  第四个参数");
+                                    StackTraceElement[] wodelogs = new Throwable("wodelog").getStackTrace();
+                                    for (int i = 0; i <wodelogs.length ; i++) {
+                                        XposedBridge.log( wodelogs[i].toString());
+                                    }
+
+                                }
+
+                            });
+
 
 
                         /*    XposedHelpers.findAndHookMethod("u.aly.dt", classLoader,"f", new XC_MethodHook() {//hook http調用的地方（傳參）
@@ -159,7 +213,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                 }
                             });*/
 
-                            XposedHelpers.findAndHookMethod("u.aly.c", classLoader, "a", byte[].class, int.class, new XC_MethodHook() {//hook 參數生成的地方
+                          /*  XposedHelpers.findAndHookMethod("u.aly.c", classLoader, "a", byte[].class, int.class, new XC_MethodHook() {//hook 參數生成的地方
 
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -173,7 +227,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                     Object j = j_int.get(param.thisObject);
                                     XposedBridge.log("c类里面 j变量  的时间戳:" + j);
                                     XposedBridge.log("c类里面 guid:" + parseByte2HexStr((byte[]) param.getResult()));
-  /*
+  *//*
                                     XposedBridge.log("c类里面 d函数  的第一个参数:" + parseByte2HexStr((byte[]) param.args[0]));
                                  Field m_int = param.thisObject.getClass().getDeclaredField("m");
                                     m_int.setAccessible(true);
@@ -186,7 +240,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                     XposedBridge.log("c类里面 l:" + parseByte2HexStr((byte[]) l));
 
 
-                                  /* */
+                                  *//* *//*
 
 
                                     Object bn_this = param.thisObject;
@@ -216,7 +270,7 @@ public class methodHookStart implements IXposedHookLoadPackage {
 
                                 }
                             });
-
+*/
                             //  final String class_name[]={"ap","ao","bi","ar","bf","am","at","cr","av","bc","bg","be","bm","bl","bb","ba","ax","ay","az","an","bd","aq","bn"};
                             final String class_name[] = {"at", "cr", "av", "bc", "bg", "be", "bm", "bl", "ba", "an", "bd", "aq", "bn"};
                             for (int i = 0; i < class_name.length; i++) {
@@ -267,18 +321,18 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                         super.afterHookedMethod(param);
 
-                                      *//*  Field f_boolean = param.thisObject.getClass().getDeclaredField("f");
+                                        Field f_boolean = param.thisObject.getClass().getDeclaredField("f");
                                         Field e_int = param.thisObject.getClass().getDeclaredField("e");
                                         f_boolean.setAccessible(true);
                                         e_int.setAccessible(true);
                                         Object f = f_boolean.get(param.thisObject);
                                         Object e = e_int.get(param.thisObject);
-*//*                                      String oo = param.getResult().toString();
+                                      String oo = param.getResult().toString();
                                         String name = param.method.getName();
 
 
 
-                                        //   XposedBridge.log( "string："+param.getResult()*//* +";f:"+f+";e:"+e*//*);
+                                        //   XposedBridge.log( "string："+param.getResult() +";f:"+f+";e:"+e);
 
                                         StackTraceElement[] wodelogs = new Throwable("wodelog").getStackTrace();
 
@@ -313,8 +367,8 @@ public class methodHookStart implements IXposedHookLoadPackage {
                                 });
 
 
-                            }*/
-
+                            }
+*/
 
 
   /*
@@ -465,20 +519,13 @@ public class methodHookStart implements IXposedHookLoadPackage {
 
     }
 
-    public static String getArrByLen(byte[] bArr, int len) {
-        if (bArr == null) {
-            return null;
-        }
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0; i < len; i++) {
-            stringBuffer.append(String.format("%02X", new Object[]{Byte.valueOf(bArr[i])}));
-        }
-        return stringBuffer.toString();
-    }
 
 
     public static String parseByte2HexStr(byte buf[]) {
         StringBuffer sb = new StringBuffer();
+        if(buf==null){
+            return "";
+        }
         for (int i = 0; i < buf.length; i++) {
             String hex = Integer.toHexString(buf[i] & 0xFF);
             if (hex.length() == 1) {
